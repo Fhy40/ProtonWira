@@ -2,18 +2,18 @@
 A Self Hosted Flask server that let's you easily convert Youtube videos into 10 - 20 second long clips to download and share
 
 
-1. Requirements:
+### 1. Requirements:
 - FFMPEG
 
-2. Python Modules:
+### 2. Python Modules:
 - Flask
 - subprocess
 - pytube
   
-3. Javascript:
+### 3. Javascript:
 - Jquery
  
-4. HTML & CSS:
+### 4. HTML & CSS:
 - Bootstrap
   
 How it works?
