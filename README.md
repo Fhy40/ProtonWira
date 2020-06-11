@@ -5,16 +5,16 @@ A Self Hosted Flask server that let's you easily convert Youtube videos into 10 
 -Requirements:
 *FFMPEG
 
--Python Modules:
+1. Python Modules:
 *Flask
 *subprocess
 *pytube
 *pytube
   
--Javascript:
+2. Javascript:
 *Jquery
  
--HTML & CSS:
+3. HTML & CSS:
 *Bootstrap
   
 How it works?
