@@ -7,9 +7,9 @@ A Self Hosted Flask server that let's you easily convert Youtube videos into 10 
 
 2. Python Modules:
 
--Flask
--subprocess
--pytube
+- Flask
+- subprocess
+- pytube
   
 3. Javascript:
 -Jquery
