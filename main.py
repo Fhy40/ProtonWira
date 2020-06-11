@@ -7,6 +7,7 @@ except Exception as e:
     print("Some modules are missing {}".format(e))
 
 cur_processing_progress = 0    
+cur_processing_status = "Starting"
 
 app = Flask(__name__)
 
@@ -28,18 +29,25 @@ def submit():
     #For windows you need to use drive name [ex: F:/Example.pdf]
     path = r"\\trex\Self-Host\python\flask_youtube_gfycat\output"
     print("SENDING FILE")
+    print("Current Processing Progress is: " + str(cur_processing_progress))   
     return send_from_directory(path, filename="proton_wira.mp4", as_attachment=True)
+    
+    
 
 @app.route('/testkitchen', methods=['POST'])
 def progress_get():
     global cur_processing_progress
+    global cur_processing_status
     print("Sending current progress " + str(cur_processing_progress))
-    res = make_response(jsonify({"progress" : str(cur_processing_progress)}))
+    res = make_response(jsonify({"progress" : str(cur_processing_progress),"status" : cur_processing_status}))
     return res
     
 def furble_palace(url,start_time,duration):
-    global cur_processing_progress
+    global cur_processing_progress    
     cur_processing_progress = 25
+    global cur_processing_status
+    cur_processing_status = "Downloading"
+    
     ytd = pytube.YouTube(url)
     try:
         ytd = ytd.streams.filter(adaptive=True, resolution="720p").first().download('downloads',filename='proton')
@@ -61,9 +69,12 @@ def furble_palace(url,start_time,duration):
     print("Download Finished")
     cur_processing_progress = 75
     print(cur_processing_progress)
-    time.sleep(5)    
+    time.sleep(5)
+    cur_processing_status = "Converting"
+    cur_processing_progress = 85    
     ffmpeg_function(start_time,duration)
-    cur_processing_progress = 100 
+    cur_processing_progress = 100
+    cur_processing_status = "Finished"
 
 def ffmpeg_function(start_time,duration):
     download_location = r"\\trex\Self-Host\python\flask_youtube_gfycat\downloads"
@@ -75,6 +86,8 @@ def ffmpeg_function(start_time,duration):
     cmd_ffmpeg_command = subprocess.run(ffmpeg_command, capture_output = True, text =True)
     global cur_processing_progress 
     cur_processing_progress = 95
+    global cur_processing_status
+    cur_processing_status = "Converted"
     print(cur_processing_progress)
     print(cmd_ffmpeg_command.stdout)
 
