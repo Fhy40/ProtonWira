@@ -1,6 +1,8 @@
 from flask import Flask, redirect, url_for, render_template,request,send_from_directory,request, jsonify, make_response 
 import subprocess
 import time
+import os
+
 try:
     import pytube
 except Exception as e:
@@ -27,7 +29,7 @@ def submit():
     print("Youtube Video Duration " + youtube_duration)
     furble_palace(youtube_url,youtube_start_time,youtube_duration)
     #For windows you need to use drive name [ex: F:/Example.pdf]
-    path = r"\\trex\Self-Host\python\flask_youtube_gfycat\output"
+    path = os.getcwd() + '\output'
     print("SENDING FILE")
     print("Current Processing Progress is: " + str(cur_processing_progress))   
     return send_from_directory(path, filename="proton_wira.mp4", as_attachment=True)
@@ -77,8 +79,8 @@ def furble_palace(url,start_time,duration):
     cur_processing_status = "Finished"
 
 def ffmpeg_function(start_time,duration):
-    download_location = r"\\trex\Self-Host\python\flask_youtube_gfycat\downloads"
-    output_location = r"\\trex\Self-Host\python\flask_youtube_gfycat\output"
+    download_location = os.getcwd() + '\downloads'
+    output_location = os.getcwd() + '\output'
     file_name = r"\proton.mp4"
     file_output = r"\proton_wira.mp4"
     ffmpeg_command = "ffmpeg -i " + download_location + file_name + " -ss " + start_time + " -t " + duration + " -c copy " + output_location + file_output + " -y"

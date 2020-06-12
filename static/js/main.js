@@ -21,6 +21,7 @@ function getProgress(){
           } else {
               has_run = 1
               console.log("Process Complete")
+              console.log(progress_checker_ajax)
           }
         console.log(has_run)
     } else {
